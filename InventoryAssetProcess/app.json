@@ -1,0 +1,26 @@
+{
+  "id": "7d2458c5-3773-48a4-a7af-452d45130b25",
+  "name": "YMPHPurchaseModule",
+  "publisher": "Froyo",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "17.0.0.0",
+  "application": "17.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://ALProject6.com/help/",
+  "showMyCode": true,
+  "runtime": "6.0"
+}
