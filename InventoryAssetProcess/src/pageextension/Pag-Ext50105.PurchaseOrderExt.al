@@ -112,6 +112,23 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
             group("Invt. PurchaseOrder Module")
             {
                 Caption = 'Invt. PurchaseOrder Module';
+                action("Post Purchase Order")
+                {
+                    Caption = 'Post';
+                    Image = Post;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    ApplicationArea = all;
+                    trigger OnAction()
+                    var
+                        PurchaseOrderPost: Codeunit "Purch.-Post (Yes/No) V2";
+                    begin
+                        if rec."ATP No." = '' then
+                            Error('ATP no. is blank')
+                        else
+                            PurchaseOrderPost.Run(Rec);
+                    end;
+                }
                 action("Get PR Lines")
                 {
                     ApplicationArea = all;
@@ -208,16 +225,7 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
                 }
             }
         }
-        modify(Post)
-        {
-            Promoted = true;
-            PromotedCategory = Process;
-            trigger OnBeforeAction()
-            begin
-                if rec."ATP No." = '' then
-                    Error('ATP no. is blank');
-            end;
-        }
+
         modify(Statistics)
         {
             Promoted = true;
@@ -233,6 +241,7 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
             Promoted = true;
             PromotedCategory = Process;
         }
+        modify(Post) { Visible = false; }
         modify(Preview) { Visible = false; }
         modify(Reopen) { Visible = false; }
         modify("Post and &Print") { Visible = false; }
