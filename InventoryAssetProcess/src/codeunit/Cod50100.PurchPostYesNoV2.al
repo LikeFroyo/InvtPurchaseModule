@@ -1,5 +1,6 @@
 codeunit 50100 "Purch.-Post (Yes/No) V2"
 {
+#pragma warning disable AL0604, AL0606
     EventSubscriberInstance = Manual;
     TableNo = "Purchase Header";
 
