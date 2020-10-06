@@ -113,10 +113,18 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
                     var
                         GetPurchaseLine: Page "Get Purchase Lines";
                         PurchaseLine: Record "Purchase Line";
+                        PurchaseHeader: Record "Purchase Header";
                     begin
                         PurchaseLine.SetFilter("Document No.", format(rec."No.").Substring(1, 2) + '*');
                         PurchaseLine.SetFilter("Location Code", rec."Location Code");
                         PurchaseLine.SetFilter("Order Type", format(rec."Order Type"));
+
+                        PurchaseHeader.SetRange("Document Type", "Purchase Document Type"::Quote);
+                        PurchaseHeader.SetRange(Status, "Purchase Document Status"::Released);
+                        if PurchaseHeader.FindSet() then
+                            repeat
+                                PurchaseLine.SetFilter("Document No.", PurchaseHeader."No.");
+                            until PurchaseHeader.Next() = 0;
 
                         GetPurchaseLine.SetFromPurchaseHeaderDocNo(rec."No.");
                         GetPurchaseLine.SetTableView(PurchaseLine);
