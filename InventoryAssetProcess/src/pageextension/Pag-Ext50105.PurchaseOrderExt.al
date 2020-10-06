@@ -279,7 +279,6 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
         PurchaseOrderDeptCode: Code[10];
         PurchaseReqDimensionValue: Record "Dimension Value";
     begin
-        Message('helo');
         case format(rec."No.").Substring(1, 2) of
             'GA':
                 PurchaseOrderDeptCode := 'GADEPT';
