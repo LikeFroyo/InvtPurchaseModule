@@ -35,7 +35,7 @@ page 50111 "PurchaseInvoiceDirExpenseList"
             PurchaseOrderSetupTempTable.Init();
             PurchaseOrderSetupTempTable.Insert()
         end;
-        PurchaseOrderSetupTempTable."Order Type" := PurchaseOrderSetupTempTable."Order Type"::"Inventory Asset";
+        PurchaseOrderSetupTempTable."Order Type" := PurchaseOrderSetupTempTable."Order Type"::"Direct Expense";
         PurchaseOrderSetupTempTable.Modify();
     end;
 }

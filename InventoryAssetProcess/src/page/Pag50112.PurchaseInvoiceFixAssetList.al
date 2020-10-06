@@ -35,7 +35,7 @@ page 50112 "PurchaseInvoiceFixAssetList"
             PurchaseOrderSetupTempTable.Init();
             PurchaseOrderSetupTempTable.Insert()
         end;
-        PurchaseOrderSetupTempTable."Order Type" := PurchaseOrderSetupTempTable."Order Type"::"Inventory Asset";
+        PurchaseOrderSetupTempTable."Order Type" := PurchaseOrderSetupTempTable."Order Type"::"Fixed Asset";
         PurchaseOrderSetupTempTable.Modify();
     end;
 }

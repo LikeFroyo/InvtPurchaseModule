@@ -20,7 +20,6 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
             trigger OnAfterValidate()
             begin
                 PurchaseOrderDepartmentUpdate();
-                CurrPage.Update();
             end;
         }
         modify("Buy-from Vendor Name")
@@ -28,7 +27,6 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
             trigger OnAfterValidate()
             begin
                 PurchaseOrderDepartmentUpdate();
-                CurrPage.Update();
             end;
         }
         addafter("Buy-from Vendor Name")
@@ -298,6 +296,7 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
         PurchaseReqDimensionValue.FindFirst();
         Rec."Shortcut Dimension 1 Code" := PurchaseReqDimensionValue.code;
         rec."Department Name" := PurchaseReqDimensionValue.Name;
+        CurrPage.Update();
     end;
 
     local procedure PurchaseOrderOrderTypeUpdate()
