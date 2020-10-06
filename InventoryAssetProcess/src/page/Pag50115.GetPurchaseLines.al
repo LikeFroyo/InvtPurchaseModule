@@ -108,29 +108,11 @@ page 50115 "Get Purchase Lines"
         end until SelectedPurchaseLine.Next() = 0;
     end;
 
+
     procedure SetFromPurchaseHeaderDocNo(PurchaseHeaderDocNo: Code[20])
     begin
         FromPurchaseHeaderDocNo := PurchaseHeaderDocNo;
     end;
-
-
-
-    /*    trigger OnInit()
-       var
-           PurchaseHeader: Record "Purchase Header";
-       begin
-           PurchaseHeader.SetRange("Document Type", "Purchase Document Type"::Quote);
-           PurchaseHeader.SetRange(Status, "Purchase Document Status"::Released);
-           if PurchaseHeader.FindSet() then begin
-               repeat
-                   rec.SetRange("Document No.", PurchaseHeader."No.");
-               until PurchaseHeader.Next() = 0;
-           end
-           else begin
-               Message('Purchase Lines Not Released Yet');
-           end;
-           rec.FindSet();
-       end; */
 
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean

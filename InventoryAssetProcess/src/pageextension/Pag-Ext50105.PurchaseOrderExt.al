@@ -20,6 +20,15 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
             trigger OnAfterValidate()
             begin
                 PurchaseOrderDepartmentUpdate();
+                CurrPage.Update();
+            end;
+        }
+        modify("Buy-from Vendor Name")
+        {
+            trigger OnAfterValidate()
+            begin
+                PurchaseOrderDepartmentUpdate();
+                CurrPage.Update();
             end;
         }
         addafter("Buy-from Vendor Name")
@@ -266,15 +275,23 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
     end;
 
     local procedure PurchaseOrderDepartmentUpdate()
+    var
+        PurchaseOrderDeptCode: Code[10];
+        PurchaseReqDimensionValue: Record "Dimension Value";
     begin
+        Message('helo');
         case format(rec."No.").Substring(1, 2) of
             'GA':
-                rec."Shortcut Dimension 1 Code" := 'GADEPT';
+                PurchaseOrderDeptCode := 'GADEPT';
             'PR':
-                rec."Shortcut Dimension 1 Code" := 'PRDEPT';
+                PurchaseOrderDeptCode := 'PRDEPT';
             'CS':
-                rec."Shortcut Dimension 1 Code" := 'CSDEPT';
+                PurchaseOrderDeptCode := 'CSDEPT';
         end;
+        PurchaseReqDimensionValue.SetRange(Code, PurchaseOrderDeptCode);
+        PurchaseReqDimensionValue.FindFirst();
+        Rec."Shortcut Dimension 1 Code" := PurchaseReqDimensionValue.code;
+        rec."Department Name" := PurchaseReqDimensionValue.Name;
     end;
 
     local procedure PurchaseOrderOrderTypeUpdate()
