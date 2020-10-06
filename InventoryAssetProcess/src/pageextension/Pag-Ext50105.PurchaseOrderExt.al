@@ -115,8 +115,9 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
                 action("Post Purchase Order")
                 {
                     Caption = 'Post';
-                    Image = Post;
+                    Image = PostedOrder;
                     Promoted = true;
+                    Enabled = (rec.Status = Rec.Status::Released);
                     PromotedCategory = Process;
                     ApplicationArea = all;
                     trigger OnAction()
@@ -181,11 +182,8 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
                     trigger OnAction()
                     var
                         PaymentJournal: page "Payment Journal";
-                        GenJournalLine: Record "Gen. Journal Line";
                     begin
-                        GenJournalLine.Init();
-                        GenJournalLine."Document No." := Rec."No.";
-                        PaymentJournal.SetTableView(GenJournalLine);
+                        PaymentJournal.SetGenJournalLineFromPurchaseOrderPage(Rec);
                         PaymentJournal.LookupMode(true);
                         PaymentJournal.RunModal();
                     end;

@@ -17,6 +17,17 @@ pageextension 50110 "PurchaseInvoiceExt" extends "Purchase Invoice"
         }
     }
 
+    actions
+    {
+        modify(Post)
+        {
+            trigger OnAfterAction()
+            begin
+                Message('hello world');
+            end;
+        }
+    }
+
     local procedure PurchaseOrderAssistEdit(): Boolean
     var
         PurchaseAndPayableSetup: Record "Purchases & Payables Setup";
