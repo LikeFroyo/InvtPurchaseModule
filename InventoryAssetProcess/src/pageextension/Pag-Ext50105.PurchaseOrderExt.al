@@ -139,47 +139,56 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
                 }
                 action("Make Advance Payment")
                 {
+                    Enabled = rec."Require Advance Payment";
                     ApplicationArea = all;
                     Promoted = true;
                     PromotedCategory = Process;
                     Image = Payment;
                     trigger OnAction()
+                    var
+                        PaymentJournal: page "Payment Journal";
+                        GenJournalLine: Record "Gen. Journal Line";
                     begin
-                        if rec."Require Advance Payment" then begin
-                            Message('Advance Payment Done');
-                        end;
+                        GenJournalLine.Init();
+                        GenJournalLine."Document No." := Rec."No.";
+                        PaymentJournal.SetTableView(GenJournalLine);
+                        PaymentJournal.LookupMode(true);
+                        PaymentJournal.RunModal();
                     end;
                 }
             }
-            action("Purchase Order Report")
+            group("Invt. PurchaseOrder Report")
             {
-                ApplicationArea = all;
-                Promoted = true;
-                PromotedCategory = Report;
-                image = Report;
-                trigger OnAction()
-                begin
-                end;
-            }
-            action("Purchase Order Report (Pre-Printed)")
-            {
-                ApplicationArea = all;
-                Promoted = true;
-                PromotedCategory = Report;
-                image = Report;
-                trigger OnAction()
-                begin
-                end;
-            }
-            action("Purchase Order Report(PP Current)")
-            {
-                ApplicationArea = all;
-                Promoted = true;
-                PromotedCategory = Report;
-                image = Report;
-                trigger OnAction()
-                begin
-                end;
+                action("Purchase Order Report")
+                {
+                    ApplicationArea = all;
+                    Promoted = true;
+                    PromotedCategory = Report;
+                    image = Report;
+                    trigger OnAction()
+                    begin
+                    end;
+                }
+                action("Purchase Order Report (Pre-Printed)")
+                {
+                    ApplicationArea = all;
+                    Promoted = true;
+                    PromotedCategory = Report;
+                    image = Report;
+                    trigger OnAction()
+                    begin
+                    end;
+                }
+                action("Purchase Order Report(PP Current)")
+                {
+                    ApplicationArea = all;
+                    Promoted = true;
+                    PromotedCategory = Report;
+                    image = Report;
+                    trigger OnAction()
+                    begin
+                    end;
+                }
             }
         }
         modify(Post)
