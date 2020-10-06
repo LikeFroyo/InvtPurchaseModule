@@ -23,7 +23,7 @@ pageextension 50110 "PurchaseInvoiceExt" extends "Purchase Invoice"
         {
             trigger OnAfterAction()
             begin
-                Message('hello world');
+                Report.Run(Report::"Purchase - Invoice");
             end;
         }
     }

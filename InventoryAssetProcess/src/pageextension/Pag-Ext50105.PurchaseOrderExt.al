@@ -197,6 +197,10 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
                     image = Report;
                     trigger OnAction()
                     begin
+                        if Rec.Status = Rec.Status::Released then
+                            Report.Run(Report::"Purchase Order")
+                        else
+                            Message('Document Not Yet Released!!!');
                     end;
                 }
                 action("Purchase Order Report (Pre-Printed)")
@@ -207,6 +211,10 @@ pageextension 50105 "PurchaseOrderExt" extends "Purchase Order"
                     image = Report;
                     trigger OnAction()
                     begin
+                        if Rec.Status = Rec.Status::Released then
+                            Report.Run(Report::"Purchase Order (Pre-Printed)")
+                        else
+                            Message('Document Not Yet Released!!!');
                     end;
                 }
                 action("Purchase Order Report(PP Current)")

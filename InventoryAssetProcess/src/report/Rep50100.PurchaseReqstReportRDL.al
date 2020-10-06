@@ -4,7 +4,7 @@ report 50100 "PurchaseReqstReportRDL"
     UsageCategory = Administration;
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    RDLCLayout = './src/report/PurchaseRequistionReport.rdl';
+    RDLCLayout = './src/report/RDLs/PurchaseRequistionReport.rdl';
 
     dataset
     {
